@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola, WebComponents</title>
+    <script>
+        class HolaComponent extends HTMLElement {
+            static get observedAttributes(){
+                return ['data-edgar', 'data-checo']
+            }
+            constructor() {
+                super();
+                console.log('--> CONSTRUCTOR')
+            }
+
+            connectedCallback(){
+                console.log('--> CONNECTED CALLBACK');
+                this.innerHTML = '<h1>Hola, Web Components</h1>';
+            }
+
+            attributeChangedCallback(name, oldValue, newValue){
+                console.log(`ATTRIBUTE CHANGED CALLBACK: name=${name}, old=${oldValue}, new= ${newValue}`)
+            }
+
+            disconnectedCallback(){
+                console.log('--> DISCONNECTED CALLBACK')
+            }
+        }
+        customElements.define('hola-mundo',HolaComponent);
+    </script>
+</head>
+<body>
+    <hola-mundo></hola-mundo>
+    <hola-mundo></hola-mundo>
+    <hola-mundo></hola-mundo>
+    <hola-mundo></hola-mundo>
+
+</body>
+</html>

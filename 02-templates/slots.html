@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slots</title>
+</head>
+<body>
+    <template id="plantilla-ejemplo">
+        <style></style>
+        <details>
+            <summary>
+                <span>
+                    <code class="name">
+                        <slot name="slot-name">NECESITA UN NOMBRE</slot>
+                    </code>
+                    <i class="descripcion">
+                        <slot name="slot-descripcion">NECESITA UNA DESCRIPCION</slot>
+                    </i>
+                </span>
+            </summary>
+            <div class="atributos">
+                <h4><span>Atributos</span></h4>
+                <slot name="slot-atributos"><p>Ninguno</p></slot>
+            </div>
+        </details>
+        <hr>
+    </template>
+<!----- Esta etiqueta yo la cree, y contiene unos slots que se van a mandar al template cuando lo clone JS------->
+    <elemento-ejemplo> <!--pinta este template pero con esta informacion --->
+        <span slot="slot-name"> Slot 1 </span>
+
+        <span slot="slot-descripcion">El Slot reserva un espacio para que sea llenado desde afuera del template</span>
+
+        <dl slot ="slot-atributos">
+            <dt>nombre</dt>
+            <dd>El atributo de nombre</dd>
+
+            <dt>descripcion</dt>
+            <dd>la descripcion de la caca</dd>
+        </dl>  <!--dl is "lista de definiciones" -->
+
+    </elemento-ejemplo>
+<!----- Esta etiqueta yo la cree, y contiene unos slots que se van a mandar al template cuando lo clone JS------->
+    <elemento-ejemplo>
+        <span slot="slot-name">template</span>
+        <span slot="slot-descripcion">A mechanism for holding client-
+          side content that is not to be rendered when a page is
+          loaded but may subsequently be instantiated during
+          <p slot ="slot-atributos">Hay muchos atributos</p>
+          runtime using JavaScript.</span>
+      </elemento-ejemplo>
+
+    <script>    
+        customElements.define(  //I'm going to 'linkear' the tag elemento-ejemplo with this code, I mean this class
+            'elemento-ejemplo', class extends HTMLElement {  //this is another way to define a class, but without name
+                constructor() {
+                    super();
+                    //cada que se ejecute el constructor , voy a clonar la plantilla con la nueva etiqueta que he creado es todo
+                    const plantilla =document.getElementById('plantilla-ejemplo').content; // I position myself in the template
+                    const shadowRoot =this.attachShadow({mode:'open'});  // I create an Shadow Element on the new tag
+                    shadowRoot.appendChild(plantilla.cloneNode(true)) //then , I add a child to that Shadow Element (that child is the template)
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>

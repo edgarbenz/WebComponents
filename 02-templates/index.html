@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML templates</title>
+</head>
+<body>
+
+    <template id="plantilla">
+        <h1>Hola, templates</h1>
+    </template>
+    
+    <script>
+        const template =document.getElementById('plantilla');
+        const node= document.importNode(template.content, true);
+        document.body.appendChild(node);
+        for(let i=1; i<=10; i++){
+            const node2 = document.importNode(template.content, true);
+            document.body.appendChild(node2);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom pop</title>
+    <style> 
+        #otroBoton{
+            background-color: orange;
+            border: 0;
+            color:white;
+            font-family: Arial, Helvetica,sans-serif;
+            font-size: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            position: static;
+            }
+    </style>
+</head>
+<body>
+    <!---
+    <button class="boton">Click</button>
+    -->
+    <template id="plantilla">
+        <style>
+            .wrapper {
+                opacity: 0;
+                transition: visibility 0s, opacity 0.25s ease-in;
+            }
+
+            .wrapper:not(.open) {
+                visibility: hidden;
+            }
+
+            .wrapper.open {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right:0;
+                bottom: 0;
+
+                height: 100vh;
+                width: 100vw;
+                opacity: 1;
+                visibility: visible;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }           
+
+            .boton, #otroBoton{
+            background-color: orange;
+            border: 0;
+            color:white;
+            font-family: Arial, Helvetica,sans-serif;
+            font-size: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            position: static;
+            }
+        </style>
+        <script>
+            const button = document.getElementById('otroBoton');
+            button.addEventListener('click', (e) => {
+                const wrapper = document.querySelector('.wrapper');
+                const botonCerrar = document.querySelector('.close');
+                const hadFocus =document.activeElement;//who was the active element, ? who had the focus?
+
+                wrapper.classList.add('open');
+                botonCerrar.focus(); // I give focus to botonCerrar
+
+                botonCerrar.addEventListener('click', () => {
+                    wrapper.classList.remove('open');
+                    hadFocus.focus();
+                })
+            })
+        </script>
+        <div class="wrapper">
+            <div class="overlay"></div>
+                <div class="dialog">
+                    <button class="close">&times</button>
+                    <h1 id="title">Soy un pop-up</h1>
+                    <div class="content" id="content">
+                        <p>Mensaje de informacion o alerta</p>
+                    </div>
+                </div>
+        </div>
+        <button id="otroBoton">Dale click a este otro Boton</button>
+    </template>
+    <edgari-use></edgari-use>
+
+    <h1 id="otroBoton">Mostrar esto</h1>
+    <script src="./main.js"></script>
+</body>
+</html>

@@ -59,22 +59,7 @@
             position: static;
             }
         </style>
-        <script>
-            const button = document.getElementById('otroBoton');
-            button.addEventListener('click', (e) => {
-                const wrapper = document.querySelector('.wrapper');
-                const botonCerrar = document.querySelector('.close');
-                const hadFocus =document.activeElement;//who was the active element, ? who had the focus?
 
-                wrapper.classList.add('open');
-                botonCerrar.focus(); // I give focus to botonCerrar
-
-                botonCerrar.addEventListener('click', () => {
-                    wrapper.classList.remove('open');
-                    hadFocus.focus();
-                })
-            })
-        </script>
         <div class="wrapper">
             <div class="overlay"></div>
                 <div class="dialog">
@@ -87,7 +72,7 @@
         </div>
         <button id="otroBoton">Dale click a este otro Boton</button>
     </template>
-    <edgari-use></edgari-use>
+    <edgar-popup id="mipopup"></edgar-popup>
 
     <h1 id="otroBoton">Mostrar esto</h1>
     <script src="./main.js"></script>

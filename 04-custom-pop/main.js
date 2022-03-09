@@ -6,6 +6,7 @@ class NuevaTag extends HTMLElement {
     constructor() {
         super();
         this.close = this.close.bind(this);
+        this._watchEscape = this._watchEscape.bind(this);
     }
 
     static get observedAttributes() { //what attributes will be observed
@@ -24,9 +25,15 @@ class NuevaTag extends HTMLElement {
         this.appendChild(node);
 
         this.querySelector('button').addEventListener('click', this.close)
+        this.querySelector('.overlay').addEventListener('click',this.close);
 
 
         //this.innerHTML = '<p>Edgariuse'
+    }
+
+    disconnectedCallback(){ //when we finish, clean the listeners
+        this.querySelector('button').removeEventListener('click', this.close)
+        this.querySelector('.overlay').removeEventListener('click',this.close);
     }
 
     get open() {
@@ -36,9 +43,11 @@ class NuevaTag extends HTMLElement {
     set open(isOpen) {
         this.querySelector('.wrapper').classList.toggle('open', isOpen);
         if(isOpen) {
-            this.setAttribute('open', true)
+            this.setAttribute('open', true);
+            document.addEventListener('keydown', this._watchEscape)
         } else {
             this.removeAttribute('open');
+            document.removeEventListener('keydown', this._watchEscape);
             //this.close();
         }
     }
@@ -47,6 +56,17 @@ class NuevaTag extends HTMLElement {
         console.log('el valor de this en el boton close es: ',this);
         if(this.open !== false) {
             this.open = false;
+        }
+
+        const closeEvent = new CustomEvent('popup-closed');
+        this.dispatchEvent(closeEvent); //disparo el evento
+    }
+
+    _watchEscape(event) {
+        console.log(event);
+        console.log('this es: ',this)
+        if(event.key === 'Escape'){
+            this.close();
         }
     }
 

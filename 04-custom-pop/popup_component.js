@@ -74,9 +74,9 @@ class NuevaTag extends HTMLElement {
         <div class="overlay"></div>
             <div class="dialog">
                 <button class="close">&times</button>
-                <h1 id="title">Soy un pop-up</h1>
+                <h1 id="title"><slot name = title></slot></h1>
                 <div class="content" id="content">
-                    <p>Mensaje de informacion o alerta</p>
+                    <slot></slot>
                 </div>
             </div>
     </div>

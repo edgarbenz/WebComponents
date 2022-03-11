@@ -14,7 +14,12 @@
             font-size: 1.5rem;
             padding: 0.5rem 1.5rem;
             position: static;
-            }
+        }
+        #content {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: blue;
+        }
+
     </style>
 </head>
 <body>
@@ -47,8 +52,26 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }           
+            }  
+            /* estados del pop up */
+            .overlay {
+                background: rgba(0, 0, 0, 0.8);
+                height: 100;
+                width: 100;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
 
+            .dialog {
+                background-color: white;
+                max-width: 400px;
+                padding: 1em;
+                position: fixed;
+            }
+            
             .boton, #otroBoton{
             background-color: orange;
             border: 0;
@@ -58,8 +81,18 @@
             padding: 0.5rem 1.5rem;
             position: static;
             }
-        </style>
 
+            button {
+                cursor: pointer;
+                position:absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            button focus {
+                border: 2px solid green;
+            }
+        </style>
         <div class="wrapper">
             <div class="overlay"></div>
                 <div class="dialog">
@@ -70,11 +103,22 @@
                     </div>
                 </div>
         </div>
-        <button id="otroBoton">Dale click a este otro Boton</button>
+        <!----
+        
+        --->
     </template>
+     
     <edgar-popup id="mipopup"></edgar-popup>
 
-    <h1 id="otroBoton">Mostrar esto</h1>
-    <script src="./main.js"></script>
+    <button id="otroBoton" class="boton">Click Aqui!</button>
+
+    <script src="./popup_component.js"></script>
+    <script>
+        const button = document.getElementById('otroBoton');
+        button.addEventListener('click', (e) => {
+            const popup = document.getElementById('mipopup');
+            popup.open = true;
+        })
+    </script>
 </body>
 </html>

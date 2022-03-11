@@ -48,7 +48,7 @@
         <span slot="slot-descripcion">A mechanism for holding client-
           side content that is not to be rendered when a page is
           loaded but may subsequently be instantiated during
-          <p slot ="slot-atributos">Hay muchos atributos</p>
+        <p slot ="slot-atributos">Hay muchos atributos</p>
           runtime using JavaScript.</span>
       </elemento-ejemplo>
 
@@ -59,11 +59,11 @@
                     super();
                     //cada que se ejecute el constructor , voy a clonar la plantilla con la nueva etiqueta que he creado es todo
                     const plantilla =document.getElementById('plantilla-ejemplo').content; // I position myself in the template
-                    const shadowRoot =this.attachShadow({mode:'open'});  // I create an Shadow Element on the new tag
-                    shadowRoot.appendChild(plantilla.cloneNode(true)) //then , I add a child to that Shadow Element (that child is the template)
-                }
-            }
-        );
+                    const shadowRoot =this.attachShadow({mode:'open'});  // I create an Shadow Element
+                    shadowRoot.appendChild(plantilla.cloneNode(true)) //then , I add a child to that Shadow Element (that child is the template) , 
+                }                                                    // but like this template is inside of Shadow Element and the same time is inside 
+            }                                                        // of a contructor of new tag, then, the template is now inside of new tag
+        );                                                           // I mean, the Shadow Element ONLY IS USING LIKE A FACILITATOR TO DO THIS.
     </script>
 
 </body>
